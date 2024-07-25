@@ -1,4 +1,4 @@
-                    Coginitrix: A IIITD E-learning platform
+# Coginitrix: A IIITD E-learning platform
 
 * Guide:- Dr. Anuj Grover
 * Team :- 
