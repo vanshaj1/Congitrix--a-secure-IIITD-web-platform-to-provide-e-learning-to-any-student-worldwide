@@ -1,0 +1,154 @@
+﻿{% extends "home/base.html" %}
+{% load static %}
+{% block body %}
+	<!-- Body Start -->
+	<div class="wrapper">
+		<div class="sa4d25">
+			<div class="container-fluid">			
+				<div class="row">
+					<div class="col-xl-12 col-lg-8">
+						<div class="section3125">
+							<div class="explore_search">
+								<div class="ui search focus">
+									<div class="ui left icon input swdh11">
+										<input class="prompt srch_explore" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more..">
+										<i class="uil uil-search-alt icon icon2"></i>
+									</div>
+								</div>
+							</div>							
+						</div>							
+					</div>
+					<div class="col-md-12">
+						<div class="_14d25">
+							<div class="row">
+
+
+								{% for item in getCourse%}
+								<div class="col-lg-3 col-md-4">
+									<div class="fcrse_1 mt-30">
+										<a href="course_detail_view.html" class="fcrse_img">
+											<img src="{% static 'home/images/courses/img-1.jpg' %}" alt="">
+											<div class="course-overlay">
+												{% comment %} <div class="badge_seller">Bestseller</div> {% endcomment %}
+												<div class="crse_reviews">
+													<i class="uil uil-star"></i>{{item.course_rating}}
+												</div>
+												<span class="play_btn1"><i class="uil uil-play"></i></span>
+												{% comment %} <div class="crse_timer">
+													25 hours
+												</div> {% endcomment %}
+											</div>
+										</a>
+										<div class="fcrse_content" style="height: 14.5rem;">
+											<div class="eps_dots more_dropdown">
+												<a href="#"><i class="uil uil-ellipsis-v"></i></a>
+												<div class="dropdown-content">
+													<span><i class='uil uil-share-alt'></i>Share</span>
+													<span><i class="uil uil-heart"></i>Save</span>
+													<span><i class='uil uil-ban'></i>Not Interested</span>
+													<span><i class="uil uil-windsock"></i>Report</span>
+												</div>																											
+											</div>
+											<div class="vdtodt">
+												<span class="vdt14">{{item.course_date}}</span>
+											</div>
+											<a href="{% url 'home:details' item.id %}" class="crse14s">{{item.course_name}}</a>
+											<a href="{% url 'home:details' item.id %}" class="crse-cate">{{item.course_desc}}</a>
+											<div class="auth1lnkprce">
+												<p class="cr1fot">By <a href="#">{{item.course_instructor.instructor_name}}</a></p>
+												{% comment %} <div class="prce142"><button><a href="{% url 'home:details' item.id %}">Details</a></button></div> {% endcomment %}
+											</div>
+										</div>
+									</div>													
+								</div>
+								{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<div class="col-md-12">
+									<div class="main-loader mt-50">													
+										<div class="spinner">
+											<div class="bounce1"></div>
+											<div class="bounce2"></div>
+											<div class="bounce3"></div>
+										</div>																										
+									</div>
+								</div>
+							</div>				
+						</div>				
+					</div>				
+				</div>
+			</div>
+		</div>
+		<footer class="footer mt-30">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-6">
+						<div class="item_f1">
+							<a href="{% url 'home:about_us' %}">About</a>
+							<a href="{% url 'home:contact_us' %}">ContactUs</a>
+							<a href="{% url 'home:sign_up' %}">SignUp</a>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="footer_bottm">
+							<div class="row">
+								<div class="col-md-6">
+									<ul class="fotb_left">
+										<li>
+											<a href="index-2.html">
+												<div class="footer_logo">
+													<img src="images/logo1.svg" alt="">
+												</div>
+											</a>
+										</li>
+										<li>
+											<p>© 2024 <strong>Cursus</strong>. All Rights Reserved.</p>
+										</li>
+									</ul>
+								</div>
+								<div class="col-md-6">
+									<div class="edu_social_links">
+										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="#"><i class="fab fa-twitter"></i></a>
+										<a href="#"><i class="fab fa-google-plus-g"></i></a>
+										<a href="#"><i class="fab fa-linkedin-in"></i></a>
+										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="#"><i class="fab fa-youtube"></i></a>
+										<a href="#"><i class="fab fa-pinterest-p"></i></a>
+									</div>
+								</div>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- Body End -->
+{% endblock body %}
+
+{% block script %}
+	<script src="{% static 'home/js/vertical-responsive-menu.min.js' %}"></script>
+{% endblock script %}

@@ -23,7 +23,7 @@
       integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
       crossorigin="anonymous"
     />
-    <title>Cognitrix!</title>
+    <title>Cognitrix</title>
 </head>
 
 <body>
@@ -34,13 +34,13 @@
     <section class="slider-starts">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="height:10%;">
                 {% for i in slider_post %} {% if forloop.counter == 2 %}
                 <div class="carousel-item active">
                     {% else %}
                     <div class="carousel-item ">
                         {% endif %}
-                      <a href="{% url 'details' i.category.slug i.slug %}">   <img src="{{i.image.url}}" class="d-block w-100" alt="{{i.image_alt_name}}" style="height: 400px;"> </a>
+                      <a href="{% url 'details' i.category.slug i.slug %}">   <img src="{{i.image.url}}" class="d-block w-100" alt="{{i.image_alt_name}}" style="height:600px;"> </a>
                     </div>
                     {% endfor %}
                 </div>
@@ -75,9 +75,9 @@
     <!----Trending Courses---->
     <section class="filter-starts">
         <div class="container">
-            <div class="row">
+            <div class="row" style=" background: #a9faf0;">
                 <div class="col-lg-12 my-2">
-                    <h4 class="mt-4">All Trending Courses</h4>
+                    <h4 class="mt-4">All Courses</h4>
                 </div>
             </div>
             <div class="row">
@@ -187,13 +187,13 @@
                                 <span class="batchtxt">Next batch</span>
                                 <span class="nextbatch">
                  <span class="value">Today</span>
-                                <span class="text">- 7th December</span>
+                                <span class="text">- 10th April</span>
                                 </span>
                                 <span class="learnlist">What will I learn?</span>
                                 <ul>
-                                    <li>Introduction to AWS</li>
-                                    <li>Security Management in AWS</li>
-                                    <li>Object Storage Options</li>
+                                    <li>{{i.title}}</li>
+                                    {% comment %} <li>Security Management in AWS</li>
+                                    <li>Object Storage Options</li> {% endcomment %}
                                 </ul>
                                 <span class="seemorebtn">View Details</span>
                             </div>
@@ -210,11 +210,11 @@
     </section>
 
     <!--- career-section - -->
-    <section class="Career mt-4 mb-4">
+    <section class="Career mt-4 mb-4" >
         <div class="container">
             <div class="row">
                 {% for i in main_course %}
-                <h2 class="mb-4">{{i.title}}</h2>
+                <h2 class="mb-4 p-4" style="background: #a9faf0;">{{i.title}}</h2>
                 {% for obj in i.posts.all %}
                 <div class="col-md-3 mt-4">
                     <a href="{% url 'details' obj.category.slug obj.slug %}" style="color: black;">
@@ -240,13 +240,13 @@
                                 <span class="batchtxt">Next batch</span>
                                 <span class="nextbatch">
                  <span class="value">Today</span>
-                                <span class="text">- 7th December</span>
+                                <span class="text">- 10th April</span>
                                 </span>
                                 <span class="learnlist">What will I learn?</span>
                                 <ul>
-                                    <li>Introduction to AWS</li>
-                                    <li>Security Management in AWS</li>
-                                    <li>Object Storage Options</li>
+                                    <li>{{obj.title}}</li>
+                                    {% comment %} <li>Security Management in AWS</li>
+                                    <li>Object Storage Options</li> {% endcomment %}
                                 </ul>
                                 <span class="seemorebtn">View Details</span>
                             </div>
@@ -257,7 +257,7 @@
             </div>
     </section>
     <!-----Recent Additions--- -->
-    <section class="Recent-Addition">
+    {% comment %} <section class="Recent-Addition">
         <div class="container">
             <h2 class="mt-5 mb-4">Recent Additions</h2>
             <div class="row">
@@ -287,7 +287,7 @@
                                 <span class="batchtxt">Next batch</span>
                                 <span class="nextbatch">
                  <span class="value">Today</span>
-                                <span class="text">- 7th December</span>
+                                <span class="text">- 8th December</span>
                                 </span>
                                 <span class="learnlist">What will I learn?</span>
                                 <ul>
@@ -303,12 +303,12 @@
                 {% endfor %}
             </div>
         </div>
-    </section>
+    </section> {% endcomment %}
     <!---chhota-div---->
     <section class="chhota-div">
         <div class="container-fluid">
             <div class="container">
-                <h2 class="mt-5 mb-4">Discover Top Categories</h2>
+                <h2 class="mt-5 mb-4 p-4" style="background: #a9faf0;">Discover Top Categories</h2>
                 <div class="discover-top-categories">
                     <ul class="less_element">
                         {% for i in latest_catg %}
@@ -331,13 +331,13 @@
     <!-----Reviews----- -->
     <section class="Reviews">
         <div class="container">
-            <h2 class="mb-5 mt-4">Reviews</h2>
+            <h2 class="mb-5 mt-4 p-4" style="background: #a9faf0;">Reviews</h2>
             <div class="row">
                 {% for i in rev %}
               <div class="col-md-4">
                     <div class="main-reviews">
                     <div class="customer-pers-details">
-                        <span class="ssss">{{i.user.first_name|slice:":1"}}</span>
+                        <span class="ssss" style="background-color:#7cb97e;">{{i.user.first_name|slice:":1"}}</span>
                         <span class="Sujatha">{{i.user.first_name}}</span>
                     </div>
                     {% if i.stars == 1 %}
@@ -385,17 +385,17 @@
     </section>
 
     <!------home_all_course_strip--------->
-    <section class="home_all_course_strip mt-4 mb-4">
+    {% comment %} <section class="home_all_course_strip mt-4 mb-4">
         <div class="container">
-            <label>Enroll, Learn, Grow, Repeat! Get ready to achieve your learning goals with Cognitrix</label>
+            <label>Enroll, Learn, Grow, Repeat! Get ready to achieve your learning goals with Edureka</label>
             <a href="#">View All Courses</a>
         </div>
-    </section>
+    </section> {% endcomment %}
 
-    <!---The Cognitrix Edge--- -->
-    {% comment %} <section class="The-Cognitrix-Edge">
+    <!---The Edureka Edge--- -->
+    {% comment %} <section class="The-Edureka-Edge">
         <div class="container">
-            <h2 class="mt-4 mb-4">The Cognitrix Edge</h2>
+            <h2 class="mt-4 mb-4">The Edureka Edge</h2>
             <div class="row text-center">
                 <div class="col-md-3">
                     <div class="edu-images">
@@ -491,17 +491,17 @@
     </section> {% endcomment %}
 
 
-    <!---The Cognitrix images--- -->
-    <section class="Edureka-images mb-5">
+    <!---The Edureka images--- -->
+    {% comment %} <section class="Edureka-images mb-5">
         <div class="container-fluid">
             <div class="row">
                 <img src="{% static 'images/edurika.jpg' %}" class="img-fluid" alt="Responsive image">
             </div>
         </div>
-    </section>
+    </section> {% endcomment %}
 
     <!-----our_corporate_clients---->
-    <section class="our_corporate_clients">
+    {% comment %} <section class="our_corporate_clients">
         <div class="container">
             <div class="row">
                 <div class="main-corporate">
@@ -548,7 +548,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> {% endcomment %}
     <!----footer-section------>
     {% include 'core/footer.html' %}
 
@@ -572,7 +572,7 @@
                                         <div class="num_box_adv mt-2">
                                             <img src="images/telephone-symbol-button.png">
                                             <div class="num_box_sub">
-                                                <p c>08068245835</p>
+                                                <p c>9999999999</p>
                                                 <p class="sub">Available 24x7 for your queries</p>
                                             </div>
                                         </div>
@@ -621,7 +621,7 @@
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password">
                         </div>
-                        <small id="emailHelp" class="form-text text-muted"><span class="note">Please Note:</span> By continuing and signing in, you agree to Cognitrix's <span class="terms-action"><a href="#">Terms & Conditions </a></span>  and <span class="terms-action"><a href="#">Privacy Policy</a></span>.</small>
+                        <small id="emailHelp" class="form-text text-muted"><span class="note">Please Note:</span> By continuing and signing in, you agree to Edureka's <span class="terms-action"><a href="#">Terms & Conditions </a></span>  and <span class="terms-action"><a href="#">Privacy Policy</a></span>.</small>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -653,7 +653,7 @@
                             <label for="exampleInputNumber1">Phone Number</label>
                             <input type="number" class="form-control" id="Number" name="Phone" placeholder="Mobile No*">
                         </div>
-                        <small id="emailHelp" class="form-text text-muted"><span class="note">Please Note:</span> By continuing and signing in, you agree to Cognitrix's <span class="terms-action"><a href="#">Terms & Conditions </a></span>  and <span class="terms-action"><a href="#" >Privacy Policy</a></span>.</small>
+                        <small id="emailHelp" class="form-text text-muted"><span class="note">Please Note:</span> By continuing and signing in, you agree to Edureka's <span class="terms-action"><a href="#">Terms & Conditions </a></span>  and <span class="terms-action"><a href="#" >Privacy Policy</a></span>.</small>
                     </form>
                 </div>
                 <div class="modal-footer">

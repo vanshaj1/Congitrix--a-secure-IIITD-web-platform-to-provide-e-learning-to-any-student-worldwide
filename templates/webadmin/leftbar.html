@@ -8,23 +8,23 @@
   {% endfor %}
 </div>
 {% endif %}
-  <a href="{% url 'home' %}" class="logo text-center logo-light">
+  {% comment %} <a href="{% url 'home' %}" class="logo text-center logo-light">
     <span class="logo-lg">
       <img src="{% static 'images/logo.png' %}" alt="" height="16" />
     </span>
     <span class="logo-sm">
       <img src="{% static 'images/logo_sm.png' %}" alt="" height="16" />
     </span>
-  </a>
+  </a> {% endcomment %}
   <!-- LOGO -->
-  <a href="{% url 'home' %}" class="logo text-center logo-dark">
+  {% comment %} <a href="{% url 'home' %}" class="logo text-center logo-dark">
     <span class="logo-lg">
       <img src="{% static 'images/logo-dark.png' %}" alt="" height="16" />
     </span>
     <span class="logo-sm">
       <img src="{% static 'images/logo_sm_dark.png' %}" alt="" height="16" />
     </span>
-  </a>
+  </a> {% endcomment %}
 
   <div class="h-100" id="left-side-menu-container" data-simplebar>
     <!--- Sidemenu -->
@@ -217,7 +217,7 @@
           <span> Add Admin Reviews </span>
         </a>
       </li>
-      <li class="side-nav-item">
+      {% comment %} <li class="side-nav-item">
         <a href="{% url 'allribbon' %}" class="side-nav-link">
           <i class="uil-calender"></i>
           <span> All Offers or Ribbons </span>
@@ -230,11 +230,11 @@
         </a>
       </li>      
       <li class="side-nav-item">
-        {% comment %} <a href="{% url 'send' %}" class="side-nav-link"> {% endcomment %}
+        <a href="{% url 'send' %}" class="side-nav-link">  <-- isse comment rehne dena
           <i class="uil-calender"></i>
           <span> Send Message </span>
         </a>
-      </li>
+      </li> {% endcomment %}
     </ul>
     <!-- end Help Box -->
     <!-- End Sidebar -->

@@ -1,8 +1,8 @@
 {% load static %}  
   <!----footer-section------>
-    <section class="footer-section">
+    <section class="footer-section mt-5" style="background-color: #a9faf0;">
         <div class="container">
-            <h2 class="mt-4 mb-4">Cognitrix!</h2>
+            <h2 class="mt-4 mb-4">Cognitrix</h2>
             <div class="row">
                     {% for i in footcategories%}
                 <div class="col-md-3">
@@ -31,11 +31,11 @@
                         About us
                        </a>
                             </li>
-                            <li>
+                            {% comment %} <li>
                                 <a href="#">
                        News & Media
                        </a>
-                            </li>
+                            </li> {% endcomment %}
                             <li>
                                 <a href="#">
                         Reviews
@@ -46,7 +46,7 @@
                         Contact us
                        </a>
                             </li>
-                            <li>
+                            {% comment %} <li>
                                 <a href="#">
                         Webinars
                        </a>
@@ -90,12 +90,12 @@
                                 <a href="#">
                       Corporate Training
                        </a>
-                            </li>
+                            </li> {% endcomment %}
                         </ul>
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                {% comment %} <div class="col-md-3">
                     <div class="footer-text">
                         <h3>Work with us </h3>
                         <ul class="trend_list">
@@ -121,7 +121,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                         Hire from Cognitrix
+                         Hire from Edureka
                        </a>
                             </li>
                         </ul>
@@ -135,14 +135,14 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </section>
-    <section class="CATEGORIES pt-4">
+    <section class="CATEGORIES pt-4" style="background-color: #0d9b91;">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                {% comment %} <div class="col-md-12">
                     <div class="panel-body">
                         <h3 class="hidden-xs">Categories</h3>
                         <ul class="trend_cat_list">
@@ -178,9 +178,9 @@
                         </ul>    
                         {% endfor %}
                     </div>
-                </div>
+                </div> {% endcomment %}
                     <div class="tncblock">
-                        <span class="brain4ce">© 2020 Developed By Inet. All rights Reserved.</span>
+                        <span class="brain4ce">© 2024 Developed By Team Cognitrix. All rights Reserved.</span>
                         <a href="#">Terms & Conditions</a>
                         <a href="#">Legal & Privacy</a>
                         <ul class="list-unstyled footer-social-icon">
@@ -211,9 +211,9 @@
             </div>
         </div>
     </section>
-    <section class="copy-right text-center mt-4 mb-4">
+    {% comment %} <section class="copy-right text-center mt-4 mb-4">
         <div class="container">
             <span>PHJY Inet Software PVT. LTD </span>
         </div>
 
-    </section>
+    </section> {% endcomment %}

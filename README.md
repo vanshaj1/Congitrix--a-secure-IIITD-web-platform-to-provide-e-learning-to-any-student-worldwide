@@ -4,7 +4,6 @@
 * Team :- 
     1. Vanshaj Sharma - MT23103 
     2. Pulkit Rihani - MT23066
-    3. Ritesh Rajput - MT23075
 
 # Overview
 The project aims to develop a robust and user-friendly e-learning website leveraging Django, HTML, CSS, JavaScript, and Bootstrap technologies. This comprehensive platform will provide learners with access to a diverse range of courses, interactive learning materials, and collaborative tools, fostering a dynamic and engaging educational experience. Here's an overview of the key components and features of the project.
@@ -156,7 +155,5 @@ in, explore, and embark on a rewarding learning journey today!
 
 # Completion 
   * This project is expected to be completed till December, 2024
-
-**Note: This is Individual Verion of this Project Main Version in on below Github Reporsitory**
 
 **Github :- https://github.com/anujgrover22/Cognitrix/**

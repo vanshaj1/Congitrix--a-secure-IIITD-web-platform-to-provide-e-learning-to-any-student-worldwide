@@ -12,7 +12,23 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Hello, world!</title>
+    <title>login</title>
+    <style>
+      /* width */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+          background: #fff;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+          background: #0d569b;
+        }
+    </style>
   </head>
   <body>
   {% if user.is_authenticated %}
@@ -22,11 +38,14 @@
   {% endif %}
   {% load crispy_forms_tags %}
     <!---navbar-section--- -->
-    <section class="navbar-section">
+    <section class="navbar-section p-3 mb-5" style="background: #0d9b91;">
         <div class="container">
-           <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.html"><img src="{% static 'images/inet.png' %}"></a>
-           </nav>
+          <h1 class="text-center mt-2 mb-2 text-white">Login</h1>
+           {% comment %} <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="index.html">
+              <img src="{% static 'images/inet.png' %}">
+            </a>
+           </nav> {% endcomment %}
        </div>
     </section>
    <!---sidebar-section--- -->
@@ -48,14 +67,14 @@
        </div>
     </section> {% endcomment %}
     
-    <section class="dashboard-heading">
+    <section class="dashboard-heading mb-5">
       <div class="container">
-         <h1 class="text-center mt-4 mb-5">Account Sign In</h1>
-           <h3>All fields are required.</h3>
+         {% comment %} <h1 class="text-center mt-4 mb-5">Account Sign In</h1> {% endcomment %}
+           {% comment %} <h3>All fields are required.</h3>
               <p>Enter information on this page in the Roman alphabet. (Alphanumeric)
-              </p>
-        <div class="row">
-           <div class="col-md-12">
+              </p> {% endcomment %}
+        <div class="row" style="display: flex;align-items: center;justify-content: center;">
+           <div class="col-md-4">
              <div class="main-dashboard">
                <h3>Username</h3>
                <p>Your username must contain 6 or more characters.</p>
@@ -70,10 +89,21 @@
                {% if request.GET.next %}
                <input type="hidden" name="next" value="{{request.GET.next}}">
                {% endif %}
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
+          <button type="submit" class="btn btn-outline-primary p-2" style=" margin-left: 40%;margin-bottom: 26px; margin-top: 18px;background-color:#0d9b91;">Login</button>
            
                </form>
-              
+               <p style="
+                    margin-left: 45%;
+                    margin-bottom: -1%;
+                    margin-top: -5%;">Or</p>
+            <div style="display:flex;align-items: center;justify-content: center;align-content: space-between !important">  
+              <div class="return-to-dashboard ml-1 p-2">
+                  <a href="{% url 'home' %}" class="btn btn-primary p-2" style="background-color:#0d9b91;">Cancel</a>
+              </div>
+              <div class="return-to-dashboard p-2">
+                  <a href="{% url 'usersignup' %}" class="btn btn-primary p-2" style="background-color:#0d9b91;">Signup</a>
+              </div>
+            </div>
           </div>
            </div>
         {% comment %} <div class="col-md-12 mt-5">
@@ -192,19 +222,19 @@
             </div>
          </div> {% endcomment %}
         </div>
-        <div class="row">
+        {% comment %} <div class="row">
           <div class="return-to-dashboard mb-4">
               <a href="{% url 'home' %}" class="btn btn-primary">Cancel</a>
           </div>
            <div class="return-to-dashboard mb-4 ml-auto">
               <a href="{% url 'usersignup' %}" class="btn btn-primary">Signup</a>
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
     </section>
 
 
-   <section class="footer-section text-center">
+   <section class="footer-section text-center" style="background: #0d9b91;">
      <div class="container">
         <div class="row">
          <div class="col-md-12">
@@ -214,7 +244,7 @@
                   <li><a href="#">Privacy</a></li>
                   <li><a href="#">Contact</a></li>
               </ul>
-              <p>Created by PHJY iNet Software Pvt.Ltd. © 2019-2020. All copy rights reserved.</p>
+              <p>Created by Cognitrix Team ©2024. All copy rights reserved.</p>
            </div>
          </div>
        </div>

@@ -1,0 +1,228 @@
+﻿{% extends "home/base.html" %}
+{% load static %}
+{% block css %}
+	<!-- Map Box -->
+	<script src="{% static '../../../api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js' %}"></script>
+	<link href="{% static '../../../api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css' %}" rel="stylesheet">
+{% endblock css %}
+
+{% block body %}
+	
+	<!-- Header Start -->
+	<header class="header clearfix">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="back_link">
+						<a href="{% url 'home:explore'%}" class="hde151">Home</a>
+					</div>
+					<div class="ml_item">
+						<div class="main_logo main_logo15" id="logo">
+							<a href="index-2.html"><img src="images/logo.svg" alt=""></a>
+							<a href="index-2.html"><img class="logo-inverse" src="images/ct_logo.svg" alt=""></a>
+						</div>				
+					</div>				
+					<div class="header_right pr-0">
+						<ul>				
+							<li class="profile-dropdown">
+								<a href="#" class="opts_account" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+									<img src="images/hd_dp.jpg" alt="">
+								</a>
+								<div class="dropdown-menu dropdown_account drop-down dropdown-menu-end">
+									<div class="channel_my">
+										<div class="profile_link">
+											<img src="images/hd_dp.jpg" alt="">
+											<div class="pd_content">
+												<div class="rhte85">
+													<h6>Team Cognitrix</h6>
+													<div class="mef78" title="Verify">
+														<i class='uil uil-check-circle'></i>
+													</div>
+												</div>
+												<span>vanshaj23103@iiitd.ac.in</span>
+											</div>							
+										</div>
+										<a href="my_instructor_profile_view.html" class="dp_link_12">View Instructor Profile</a>
+									</div>
+									<div class="night_mode_switch__btn">
+										<a href="#" id="night-mode" class="btn-night-mode">
+											<i class="uil uil-moon"></i> Night mode
+											<span class="btn-night-mode-switch">
+												<span class="uk-switch-button"></span>
+											</span>
+										</a>
+									</div>
+									<a href="instructor_dashboard.html" class="item channel_item">Cognitrix Dashboard</a>						
+									<a href="sign_in.html" class="item channel_item">Sign Out</a>
+								</div>
+							</li>
+						</ul>
+					</div>		
+				</div>		
+			</div>
+		</div>
+	</header>
+	<!-- Header End -->
+	<!-- Body Start -->
+	<div class="wrapper _bg4586 _new89">		
+		<div class="_215b15">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">						
+						<div class="title125">						
+							<div class="titleleft">					
+								<div class="ttl121">
+								</div>
+							</div>
+							<div class="titleright">						
+								<a href="{% url 'home:explore' %}" class="blog_link"><i class="uil uil-angle-double-left"></i>Back to Home</a>
+							</div>
+						</div>
+						<div class="title126">	
+							<h2>Contact Us</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="contact1256">
+			<div class="container">
+				<div class="row">					
+					<div class="col-lg-3 col-md-6">
+						<a href="help.html" class="contact_link_step">
+							<img src="images/help_icon.svg" alt="">
+							<h4>All Courses</h4>
+						</a>												
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<a href="{% url 'home:about_us'%}" class="contact_link_step">
+							<img src="images/blog_icon.svg" alt="">
+							<h4>About</h4>
+						</a>												
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<a href="{% url 'home:student_dashboard' %}" class="contact_link_step">
+							<img src="images/blog_icon.svg" alt="">
+							<h4>Dashboard</h4>
+						</a>												
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<a href="{% url 'home:explore' %}" class="contact_link_step">
+							<img src="images/blog_icon.svg" alt="">
+							<h4>Explore</h4>
+						</a>												
+					</div>
+					<div class="col-lg-8">
+						<div class="contact_map">
+							<div id="map"></div>
+						</div>												
+					</div>
+					<div class="col-lg-4">
+						<div class="contact_info">
+							<div class="checkout_title">
+								<h4>Contact Information</h4>
+								<img src="images/line.svg" alt="">
+							</div>
+							<ul class="contact_list_info">
+								<li><div class="txt_cntct"><span class="cntct_895"><i class="uil uil-location-point"></i>Main Address :</span><p>Govind puri metro station</p></div></li>
+								<li><div class="txt_cntct"><span class="cntct_895"><i class="uil uil-envelope"></i>Email Address :</span><p>Test@iiitd.ac.in</p></div></li>
+								<li><div class="txt_cntct"><span class="cntct_895"><i class="uil uil-mobile-android-alt"></i>Phone Number :</span><p>9999999999</p></div></li>
+							</ul>
+							<div class="edututs_links_social">
+								<ul class="tutor_social_links">
+									<li><a href="#" class="fb"><i class="fab fa-facebook-f"></i></a></li>
+									<li><a href="#" class="tw"><i class="fab fa-twitter"></i></a></li>
+									<li><a href="#" class="ln"><i class="fab fa-linkedin-in"></i></a></li>
+									<li><a href="#" class="yu"><i class="fab fa-youtube"></i></a></li>
+								</ul>
+							</div>
+						</div>												
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<footer class="footer mt-30">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-6">
+						<div class="item_f1">
+							<a href="{% url 'home:about_us' %}">About</a>
+							<a href="{% url 'home:contact_us' %}">ContactUs</a>
+							<a href="{% url 'home:sign_up' %}">SignUp</a>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="footer_bottm">
+							<div class="row">
+								<div class="col-md-6">
+									<ul class="fotb_left">
+										<li>
+											<a href="index-2.html">
+												<div class="footer_logo">
+													<img src="images/logo1.svg" alt="">
+												</div>
+											</a>
+										</li>
+										<li>
+											<p>© 2024 <strong>Cognitrix</strong>. All Rights Reserved.</p>
+										</li>
+									</ul>
+								</div>
+								<div class="col-md-6">
+									<div class="edu_social_links">
+										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="#"><i class="fab fa-twitter"></i></a>
+										<a href="#"><i class="fab fa-google-plus-g"></i></a>
+										<a href="#"><i class="fab fa-linkedin-in"></i></a>
+										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="#"><i class="fab fa-youtube"></i></a>
+										<a href="#"><i class="fab fa-pinterest-p"></i></a>
+									</div>
+								</div>		
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- Body End -->
+
+	
+{% endblock body %}
+	
+	{% block script %}
+	<!-- Map Box JS -->
+	<script src="{% static '../../../unpkg.com/es6-promise%404.2.4/dist/es6-promise.auto.min.js' %}"></script>
+	<script src="{% static '../../../unpkg.com/%40mapbox/mapbox-sdk%400.15.3/umd/mapbox-sdk.min.js' %}"></script>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiZ2FtYm9sIiwiYSI6ImNscngwNTd0NzE4Y3UyamxtaXZxYWpsangifQ.PCxDojd6d0htxnPb7eqlpw';
+		var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+		mapboxClient.geocoding.forwardGeocode({
+		query: 'Ludhiana, India',
+		autocomplete: false,
+		limit: 1
+		})
+		.send()
+		.then(function (response) {
+		if (response && response.body && response.body.features && response.body.features.length) {
+		var feature = response.body.features[0];
+	 
+		var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/streets-v11',
+		center: [75.8429,30.9042],
+		zoom: 10
+		});				
+
+		new mapboxgl.Marker()
+		.setLngLat(feature.center)
+		.addTo(map);
+		}
+		
+		// Add zoom and rotation controls to the map.
+		map.addControl(new mapboxgl.NavigationControl());
+		});						
+	</script>
+	{% endblock script %}	

@@ -14,16 +14,15 @@
             <li><a href="#">{{posts.title}} ></a></li>
           </ul>
           <div class="clp_title_top">
-            <span>Best Seller</span>
+            <span>Course</span>
             <h1>{{posts.title|title}}</h1>
-            <div class="live_cl">{{posts.badge}}</div>
+            {% comment %} <div class="live_cl">{{posts.badge}}</div> {% endcomment %}
           </div>
         </div>
       </div>
       <div
-        class="col-lg-3 col-md-4 col-sm-12 col-xs-12 no-padding hidden-xs hidden-sm cc_cursor"
-      >
-        <div class="cnt_box">
+        class="col-lg-3 col-md-4 col-sm-12 col-xs-12 no-padding hidden-xs hidden-sm cc_cursor">
+        {% comment %} <div class="cnt_box">
           <span class="iconcall">
             <i class="fa fa-phone" aria-hidden="true"></i>
           </span>
@@ -31,7 +30,7 @@
             <span class="text">Have Queries? Ask us</span>
             <a href="#">08040423753</a>
           </div>
-        </div>
+        </div> {% endcomment %}
       </div>
     </div>
   </div>
@@ -101,7 +100,7 @@
     </div>
   </div>
 </section>
-<div class="navigation-wrap bg-light start-header start-style">
+{% comment %} <div class="navigation-wrap bg-light start-header start-style">
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -150,9 +149,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 <!----clp_batch_table ------>
-<section class="container-flud clp_batch_table blue_gradient_background">
+{% comment %} <section class="container-flud clp_batch_table blue_gradient_background">
   <div class="container">
     <h2 class="title_box_heading mb-4">
       Instructor-led AWS Architect live online classes
@@ -163,15 +162,6 @@
           <div class="table-responsive">
             <table class="table">
               <thead>
-                {% comment %}
-                <tr>
-                  <th scope="col">Nov 30th</th>
-                  <th scope="col">MON-FRI (15 Days)</th>
-                  <th scope="col">
-                    Sold Out Timings - 08:30 PM to 10:30 PM (IST)
-                  </th>
-                </tr>
-                {% endcomment %}
               </thead>
               <tbody>
                 {% for i in time %}
@@ -180,23 +170,7 @@
                   <td>{{i.day_duration}}</td>
                   <td>FILLING {{i.time_duration1}}-{{i.time_duration2}}</td>
                 </tr>
-                {% endfor %} {% comment %}
-                <tr>
-                  <th scope="row">DEC 07th</th>
-                  <td>MON - FRI (15 DAYS)</td>
-                  <td>Timings - 08:30 PM to 10:30 PM (IST)</td>
-                </tr>
-                <tr>
-                  <th scope="row">JAN 02nd</th>
-                  <td>SAT & SUN (5 WEEKS) Weekend Batch</td>
-                  <td>Timings - 07:00 AM to 10:00 AM (IST)</td>
-                </tr>
-                <tr>
-                  <th scope="row">JAN 04th</th>
-                  <td>MON - FRI (15 DAYS)</td>
-                  <td>Timings - 07:00 AM to 09:00 AM (IST)</td>
-                </tr>
-                {% endcomment %}
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -232,7 +206,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 {% if not videos %}
 {% else %}
 <section class="Program-Syllabus">
@@ -352,7 +326,7 @@
 
 <!----Enroll-Now------>
 
-<section class="Enroll-Now d-none d-lg-block">
+{% comment %} <section class="Enroll-Now d-none d-lg-block">
   <div class="container">
     <div class="row">
       <div
@@ -393,12 +367,12 @@
       </div>
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 
 <!------Accordion-2-------->
 
-<!---The Cognitrix images----->
-<section class="Cognitrix-images mb-5">
+<!---The Edureka images----->
+{% comment %} <section class="Edureka-images mb-5">
   <div class="container-fluid">
     <div class="row">
       <img
@@ -408,7 +382,7 @@
       />
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 <!----Testimonial Reviews------>
 <section class="Reviews">
   <div class="container">
@@ -419,7 +393,7 @@
       <div class="col-md-4">
         <div class="main-reviews">
           <div class="customer-pers-details">
-            <span class="ssss">{{i.user.first_name|slice:":1"}}</span>
+            <span class="ssss" style="background: #7cb9b7;">{{i.user.first_name|slice:":1"}}</span>
             <span class="Sujatha">{{i.user.first_name}}</span>
           </div>
           {% if i.stars == 1 %}
@@ -498,7 +472,7 @@
 
 <!----Enroll-Now------>
 
-<section class="Enroll-Now d-none d-lg-block">
+{% comment %} <section class="Enroll-Now d-none d-lg-block">
   <div class="container">
     <div class="row">
       <div
@@ -539,7 +513,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 <!----Features------>
 <section class="Features">
   <div class="container">
@@ -623,7 +597,7 @@
 </section>
 <!----Enroll-Now------>
 
-<section class="Enroll-Now d-none d-lg-block">
+{% comment %} <section class="Enroll-Now d-none d-lg-block">
   <div class="container">
     <div class="row">
       <div
@@ -664,6 +638,6 @@
       </div>
     </div>
   </div>
-</section>
+</section> {% endcomment %}
 
 {% endblock body %}
