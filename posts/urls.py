@@ -85,6 +85,13 @@ urlpatterns = [
     path('edituserprofile/', views.edit_profile, name='editprofile'),
     path('changepassword/', views.change_password, name='changepassword'),
     path('certificate/<str:category_slug>/<str:slug>/', views.usercertificate, name='certificate'),
+    path('enroll/', views.enroll, name='enroll'),
+    path('enrolled-courses/',views.enrolled_courses, name = 'enrolled_courses'),
+
+
+
+    #testing
+    # path('v1/userdashboard/', views.user_dashboard, name='userdashboard'),    
 
     #Public urls
     # path('career/', views.career, name='career'),

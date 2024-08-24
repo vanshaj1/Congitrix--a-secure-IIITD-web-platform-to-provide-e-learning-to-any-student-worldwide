@@ -35,6 +35,17 @@
           <div class="main-dashboard">
             <h2>Your Purchased Courses</h2>
             <span>Your Courses</span>
+
+            <!--testing-->
+            <ul>
+              {% for course in enrolled_courses %}
+                  <li>{{ course.course_id.id}}</li>
+              {% endfor %}
+            </ul>
+            <!--testing-->
+
+
+
              <ul>
               {% for i in orders %} 
               {% for obj in i.orderitems.all %} 

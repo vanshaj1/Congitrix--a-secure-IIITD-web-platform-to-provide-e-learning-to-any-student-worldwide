@@ -251,21 +251,37 @@ def logout(request):
     request.session.clear()
     return redirect('home')
 
+
+
+@login_required(login_url='/userlogin/')
 def userdashboard(request):
-    customer = Customer.objects.all()
+    customer = Customer.objects.get(user_id=request.user.id)
+    context = {'customer':customer}
+    return render(request,'userdashboard/index-3.html',context)
+
+
+
+@login_required(login_url='/userlogin/')
+def enrolled_courses(request):
     carts = Cart.objects.filter(user=request.user, purchase=True)
     orders = Order.objects.filter(user=request.user, ordered=True)
+    enrolled_courses = user_enrollment.objects.filter(user_id=request.user)
+    customer = Customer.objects.get(user_id=request.user.id)
     # if orders.exists() and carts.exists():
     #     order = orders[0]
     #     return render(request, 'users/index.html', context={'carts':carts,'orders':orders})
-    context = {'carts':carts,'customer':customer, 'orders':orders}
-    return render(request, 'users/index.html', context)
+    context = {'enrolled_courses':enrolled_courses, 'customer':customer}
+    return render(request,'userdashboard/student-courses.html',context)
 
+
+@login_required(login_url='/userlogin/')
 def userprofile(request):
     customer = Customer.objects.get(user_id=request.user.id)
     context = {'customer':customer}
     return render(request, 'users/profile.html', context)
 
+
+@login_required(login_url='/userlogin/')
 def edit_profile(request):
     if request.method == 'POST':
         user_form = CustomerCreationEditForm(request.POST or None, request.FILES or None, instance=request.user)
@@ -1173,4 +1189,29 @@ def edit_ribbon(request, id):
         ribbon = ribbonform(instance=ribbon)
 
     return render(request, "webadmin/edit_ribbon.html", {'edit':ribbon })    
+
+
+
+@login_required(login_url='/userlogin/')
+def enroll(request):
+    # Access the logged-in user
+    user = request.user
+    course_id = request.POST.get('course_id')
+    # Get the course instance by ID
+    course = Post.objects.get(id=course_id)
+    # Create or get the enrollment
+    enrollment, created = user_enrollment.objects.get_or_create(user_id=user, course_id=course)
+
+    # Handle success or already enrolled cases
+    if created:
+        return redirect('userhome')  # Replace with your success URL or view
+    else:
+        return redirect('userhome')
+    
+
+
+
+#**************************Student Dashboard*****************************
+# def user_dashboard(request):
+#     return render(request, 'userdashboard/index-3.html')
     

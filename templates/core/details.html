@@ -326,7 +326,7 @@
 
 <!----Enroll-Now------>
 
-{% comment %} <section class="Enroll-Now d-none d-lg-block">
+<section class="Enroll-Now d-none d-lg-block">
   <div class="container">
     <div class="row">
       <div
@@ -335,11 +335,12 @@
       >
         <div class="title">Like the curriculum? Enroll Now</div>
         <div class="sub">
-          Structure your learning and get a certificate to prove it.
+          Structure your learning today 😎.
         </div>
-        <form>
+        <form class = "ml-4" action="/enroll/" method="POST">
+          {% csrf_token %}
           <div class="row">
-            <div class="col-4">
+            {% comment %} <div class="col-4">
               <label for="formGroupExampleInput">Phone Number</label>
               <input
                 type="Number"
@@ -356,8 +357,9 @@
                 id="Email"
                 placeholder="Email"
               />
-            </div>
+            </div> {% endcomment %}
             <div class="col-4 mt-2">
+              <input type="hidden" name="course_id" value="{{ posts.id }}">
               <button type="submit" class="btn btn-primary mt-4">
                 ENROLL NOW
               </button>
@@ -367,11 +369,11 @@
       </div>
     </div>
   </div>
-</section> {% endcomment %}
+</section>
 
 <!------Accordion-2-------->
 
-<!---The Edureka images----->
+<!---The images----->
 {% comment %} <section class="Edureka-images mb-5">
   <div class="container-fluid">
     <div class="row">

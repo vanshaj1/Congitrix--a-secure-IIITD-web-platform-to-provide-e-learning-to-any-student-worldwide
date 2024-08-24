@@ -342,3 +342,17 @@ class offers(models.Model):
 
     def __str__(self):
         return self.title 
+
+
+
+
+class user_enrollment(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    course_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    enrolled_on = models.DateTimeField(auto_now_add=True)
+
+
+
+class course_videos(models.Model):
+    course_id = models.ForeignKey(Post, on_delete=models.CASCADE, default=1) 
+    video_id = models.CharField(max_length=255)  
