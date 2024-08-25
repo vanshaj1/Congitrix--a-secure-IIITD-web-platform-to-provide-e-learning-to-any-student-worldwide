@@ -19,6 +19,17 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 from Cognitrix.settings import *
 import razorpay
+from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from urllib.parse import urlparse, parse_qs
+import requests
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from a .env file
+load_dotenv()
+
 client = razorpay.Client(auth=("KEY_ID", "KEY_SECRET"))
 # Create your views here.
 
@@ -278,7 +289,8 @@ def enrolled_courses(request):
 def userprofile(request):
     customer = Customer.objects.get(user_id=request.user.id)
     context = {'customer':customer}
-    return render(request, 'users/profile.html', context)
+    # return render(request, 'users/profile.html', context)
+    return render(request, 'userdashboard/setting.html', context)
 
 
 @login_required(login_url='/userlogin/')
@@ -302,6 +314,97 @@ def edit_profile(request):
         'profile_form': profile_form
     })
 
+
+@login_required(login_url='/userlogin/')
+def edit_user_profile(request):
+    user = request.user
+    customer = Customer.objects.get(user_id=request.user.id)
+    user.first_name = request.POST.get('first_name')
+    user.last_name = request.POST.get('last_name')
+    user.save()
+    customer.Country = request.POST.get('Country')
+    customer.mobile = request.POST.get('mobile')
+    customer.address = request.POST.get('address')
+    customer.Zip_Code = request.POST.get('Zip_Code')
+    customer.save()
+    return redirect('profile')
+
+
+def course_details(request):
+    post_id = request.POST.get("post_id")
+
+    post = Post.objects.get(id=post_id)
+
+    print(post.youtube)
+
+    # Your YouTube playlist URL
+    url = post.youtube
+
+    # Parse the URL
+    parsed_url = urlparse(url)
+
+    # Extract query parameters
+    query_params = parse_qs(parsed_url.query)
+
+    # Get the value of the 'list' parameter
+    playlist_id = query_params.get('list', [None])[0]
+
+    # YOUTUBE_API_KEY
+    API_KEY = os.getenv("YOUTUBE_API_KEY")
+
+    # creating YOUTUBE API
+    api_url = f'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId={playlist_id}&key={API_KEY}'
+    
+    # fetching From API URL
+    response = requests.get(api_url)
+    
+    if response.status_code == 200:
+        data = response.json()
+    else:
+        data = {'error': 'Failed to retrieve data'}
+
+    video_list = []
+    for item in data.get('items', []):
+        video_id = item.get('snippet', {}).get('resourceId', {}).get('videoId')
+        video_title = item.get('snippet', {}).get('title')
+        video_description = item.get('snippet', {}).get('description')
+        video_thumbnails = item.get('snippet', {}).get('thumbnails',{}).get('default',{}).get('url')
+        instructor = item.get('snippet', {}).get('videoOwnerChannelTitle')
+        video = {
+            'id':video_id,
+            'title':video_title,
+            'description':video_description,
+            'thumbnails': video_thumbnails,
+            'instructor':instructor
+        }
+        video_list.append(video)
+    
+    context = {'video_data':video_list}
+
+    return render(request,"userdashboard/live-class.html",context)
+
+@login_required(login_url='/userlogin/')
+def change_user_password(request):
+    new_password = request.POST.get('new_password')
+    confirm_password = request.POST.get('confirm_password')
+    
+    user = request.user
+    
+    # Check if the new passwords match
+    if new_password == confirm_password:
+        # Set the new password
+        user.set_password(new_password)
+        user.save()
+
+        # Update the session to keep the user logged in after password change
+        update_session_auth_hash(request, user)
+        
+        messages.success(request, 'Your password was successfully updated!')
+    else:
+        messages.error(request, 'The new passwords do not match.')
+    return redirect('profile')
+
+
 # def edit_profile(request):
 #     user=User.objects.get(id=request.user.id)
 #     userForm=CustomerCreationEditForm(instance=request.user)
@@ -314,6 +417,7 @@ def edit_profile(request):
 #             user.save()
 #             return redirect('profile')
 #     return render(request,'users/edit_profile.html',context=mydict)
+
 
 
 # def edit_user_data(request, id):
@@ -329,6 +433,9 @@ def edit_profile(request):
 #         editcustomerform= CustomerEditForm(instance=customer)
 
 #     return render(request, "users/edit_data.html", {'edit':editcustomerform})
+
+
+
 
 def change_password(request):
     if request.method == 'POST':
@@ -1208,6 +1315,9 @@ def enroll(request):
     else:
         return redirect('userhome')
     
+
+
+
 
 
 

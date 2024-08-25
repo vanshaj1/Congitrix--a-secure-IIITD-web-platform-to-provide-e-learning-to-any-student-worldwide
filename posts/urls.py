@@ -90,8 +90,10 @@ urlpatterns = [
 
 
 
-    #testing
-    # path('v1/userdashboard/', views.user_dashboard, name='userdashboard'),    
+    #new User Dashboard Urls
+    path('edit-user-profile/', views.edit_user_profile, name='edit_user_profile'),   
+    path('change-user-password/', views.change_user_password, name='change_user_password'),    
+    path("course-details/",views.course_details,name='course_details'),
 
     #Public urls
     # path('career/', views.career, name='career'),

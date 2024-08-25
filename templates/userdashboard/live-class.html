@@ -17,12 +17,14 @@
 
             <div class="row gy-4">
                 <div class="col-md-8">
-                    <div class="rounded-16 overflow-hidden position-relative">
-                        <span class="live-badge text-white bg-danger-600 rounded-8 text-15 px-32 py-10 position-absolute inset-block-start-0 inset-inline-start-0 z-1 ms-24 mt-24">Live</span>
-                        <video id="player" class="player" playsinline controls data-poster="assets/images/thumbs/live-class.png">
+                    <div class="rounded overflow-hidden position-relative">
+                        {% comment %} <span class="live-badge text-white bg-danger-600 rounded-8 text-15 px-32 py-10 position-absolute inset-block-start-0 inset-inline-start-0 z-1 ms-24 mt-24">Live</span> {% endcomment %}
+                        <iframe id = "selected_video" width="640" height="347" src="https://www.youtube.com/embed/{{ video_data.0.id }}" frameborder="0" allowfullscreen></iframe>
+                        {% comment %} <video id="player" class="player" playsinline controls data-poster="{% static 'images/thumbs/live-class.png' %}">
                             <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4">
+                            <source src= f"https://www.youtube.com/embed/{{ video_data[0].get('id') }}" type="video/mp4">
                             <source src="https://html.themeholy.com/path/to/video.webm" type="video/webm">
-                        </video>
+                        </video> {% endcomment %}
                     </div>
                     <!-- Course Card Start -->
                     <div class="card mt-24">
@@ -35,10 +37,10 @@
                             <ul class="comment-list">
                                 <li>
                                     <div class="d-flex align-items-start gap-8 flex-xs-row flex-column">
-                                        <img src="assets/images/thumbs/mentor-img1.png" alt="" class="w-48 h-48 rounded-circle object-fit-cover flex-shrink-0">
+                                        <img src="{% static 'images/thumbs/mentor-img1.png' %}" alt="" class="w-48 h-48 rounded-circle object-fit-cover flex-shrink-0">
                                         <div class="">
                                             <div class="flex-align flex-wrap gap-8">
-                                                <h6 class="text-15 fw-bold mb-0">Amir Hamja </h6>
+                                                <h6 class="text-15 fw-bold mb-0">Demo User 1</h6>
                                                 <span class="py-0 px-8 bg-main-50 text-main-600 rounded-4 text-15 fw-medium h5 mb-0 fw-bold">You</span>
                                                 <span class="text-gray-300 text-13">8:00PM   </span>
                                             </div>
@@ -48,10 +50,10 @@
                                     <ul class="sub-comment-list mt-24">
                                         <li>
                                             <div class="d-flex align-items-start gap-8 flex-xs-row flex-column">
-                                                <img src="assets/images/thumbs/mentor-img2.png" alt="" class="w-48 h-48 rounded-circle object-fit-cover flex-shrink-0">
+                                                <img src="{% static 'images/thumbs/mentor-img2.png' %}" alt="" class="w-48 h-48 rounded-circle object-fit-cover flex-shrink-0">
                                                 <div class="">
                                                     <div class="flex-align flex-wrap gap-8">
-                                                        <h6 class="text-15 fw-bold mb-0">Selina Eyvi</h6>
+                                                        <h6 class="text-15 fw-bold mb-0">Demo User 2</h6>
                                                         <span class="py-0 px-8 bg-main-50 text-main-600 rounded-4 text-15 fw-medium h5 mb-0 fw-bold">Mentor</span>
                                                         <span class="text-gray-300 text-13">8:10PM</span>
                                                     </div>
@@ -90,18 +92,21 @@
                                 </div>
                             </div>
                             <ul class="lesson-list">
+                                {% for video in video_data %}
                                 <li class="lesson-list__item d-flex align-items-start gap-16 active">
                                     <span class="circle w-16 h-16 flex-center rounded-circle text-main-100 text-13 flex-shrink-0">
                                         <i class="ph-fill ph-check-circle"></i>
                                     </span>
                                     <div>
-                                        <a href="#" class="text-13 text-heading d-block text-gray-600 fw-medium hover-text-main-600">
-                                            Intro
+                                        {% comment %} <span id="video_id" style="display:none;">{{video.id}}</span> {% endcomment %}
+                                        <a onclick = "watch_video('{{video.id}}')" class="text-13 text-heading d-block text-gray-600 fw-medium hover-text-main-600">
+                                            {{video.title}}
                                             <span class="text-13 text-heading d-block text-gray-600 fw-medium">Last access: 12Jan 24. 8:00PM</span>
                                         </a>
                                     </div>
                                 </li>
-                                <li class="lesson-list__item d-flex align-items-start gap-16 active">
+                                {% endfor %}
+                                {% comment %} <li class="lesson-list__item d-flex align-items-start gap-16 active">
                                     <span class="circle w-16 h-16 flex-center rounded-circle text-main-100 text-13 flex-shrink-0">
                                         <i class="ph-fill ph-check-circle"></i>
                                     </span>
@@ -166,7 +171,7 @@
                                             <span class="text-13 text-heading d-block text-gray-600 fw-medium">Locked</span>
                                         </a>
                                     </div>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
                         </div>
                     </div>
@@ -174,13 +179,17 @@
             </div>
         </div>
     </div>
-    
+{% endblock body %}
 
-
-    {% block script_block%}
+{% block script_block%}
     <script>
         const player = new Plyr('#player');
         const featuredPlayer = new Plyr('#featuredPlayer');
+        
+        function watch_video(video_id){
+            //let video_id = document.getElementById("video_id").innerHTML;
+            let selected_video = document.getElementById("selected_video");
+            selected_video.setAttribute("src","https://www.youtube.com/embed/" + video_id)
+        }
     </script>
-    {% endblock script_block%}
-{% endblock body %}
+{% endblock script_block%}
