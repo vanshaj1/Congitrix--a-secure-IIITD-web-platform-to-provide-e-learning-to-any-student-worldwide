@@ -43,11 +43,11 @@
                                     <div class="card border border-gray-100">
                                         <div class="card-body p-8">
                                             <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                                <img src="{{course.course_id.image.url}}" alt="Course Image">
+                                                <img src="{{course.course.image.url}}" alt="Course Image">
                                             </a>
                                             <div class="p-8">
-                                                {% comment %} <span class="text-13 py-2 px-10 rounded-pill bg-success-50 text-success-600 mb-16">{{course.course_id.meta_tags}}</span> {% endcomment %}
-                                                <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">{{course.course_id.title}}</a></h5>
+                                                {% comment %} <span class="text-13 py-2 px-10 rounded-pill bg-success-50 text-success-600 mb-16">{{course.course.meta_tags}}</span> {% endcomment %}
+                                                <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">{{course.course.title}}</a></h5>
 
                                                 <div class="flex-align gap-8 mt-12">
                                                     {% comment %} <span class="text-main-600 flex-shrink-0 text-13 fw-medium">32%</span> {% endcomment %}
@@ -58,7 +58,7 @@
                                                 <div class="flex-align gap-8 flex-wrap mt-16">
                                                     <img src="{%static 'images/thumbs/user-img1.png' %}" class="w-32 h-32 rounded-circle object-fit-cover" alt="User Image">
                                                     <div>
-                                                        <span class="text-gray-600 text-13">Created by <a href="profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">{{course.course_id.author}}</a> </span>
+                                                        <span class="text-gray-600 text-13">Created by <a href="profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">{{course.course.author}}</a> </span>
                                                         <div class="flex-align gap-4">
                                                             <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
                                                             <span class="text-13 fw-bold text-gray-600">4.9</span>
@@ -68,7 +68,7 @@
                                                 </div>
                                                 <form action="/course-details/" method="POST">
                                                     {% csrf_token %}
-                                                    <input name="post_id" value="{{course.course_id.id}}" style="display:none;"/>
+                                                    <input name="post_id" value="{{course.course.id}}" style="display:none;"/>
                                                    <button type="submit" class="btn btn-outline-main rounded-pill py-9 w-100 mt-24">Continue Watching</button>
                                                 </form>
                                             </div>

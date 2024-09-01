@@ -18,7 +18,7 @@
 
                <!-- Breadcrumb Right Start -->
                <div class="flex-align gap-8 flex-wrap">
-                <div class="position-relative text-gray-500 flex-align gap-4 text-13">
+                {% comment %} <div class="position-relative text-gray-500 flex-align gap-4 text-13">
                     <span class="text-inherit">Sort by: </span>
                     <div class="flex-align text-gray-500 text-13 border border-gray-100 rounded-4 ps-20 focus-border-main-600 bg-white">
                         <span class="text-lg"><i class="ph ph-funnel-simple"></i></span>
@@ -29,15 +29,15 @@
                             <option value="1">Matches</option>
                         </select>
                     </div>
-                </div>
-                <div class="flex-align text-gray-500 text-13 border border-gray-100 rounded-4 ps-20 focus-border-main-600 bg-white">
+                </div> {% endcomment %}
+                {% comment %} <div class="flex-align text-gray-500 text-13 border border-gray-100 rounded-4 ps-20 focus-border-main-600 bg-white">
                     <span class="text-lg"><i class="ph ph-layout"></i></span>
                     <select class="form-control ps-8 pe-20 py-16 border-0 text-inherit rounded-4 text-center" id="exportOptions">
                         <option value="" selected disabled>Export</option>
                         <option value="csv">CSV</option>
                         <option value="json">JSON</option>
                     </select>
-                </div>
+                </div> {% endcomment %}
             </div>
             <!-- Breadcrumb Right End -->
             </div>
@@ -47,51 +47,63 @@
                 <!-- Card Header Start -->
                 <div class="card-header border-bottom border-gray-100">
                     <div class="flex-between flex-wrap gap-8">
-                        <form action="#" class="w-350 d-sm-block d-none">
+                        {% comment %} <form action="#" class="w-350 d-sm-block d-none">
                             <div class="position-relative">
                                 <button type="submit" class="input-icon text-xl d-flex text-gray-100 pointer-event-none"><i class="ph ph-magnifying-glass"></i></button> 
                                 <input type="text" class="form-control ps-40 h-40 border-transparent focus-border-main-600 bg-main-50 rounded-pill placeholder-15" placeholder="Search...">
                             </div>
-                        </form>
+                        </form> {% endcomment %}
                         <div class="flex-align gap-8 flex-wrap">
                             <div class="position-relative text-gray-500 flex-align gap-4 text-13">
-                                <span class="text-inherit">Sort by: </span>
+                                {% comment %} <span class="text-inherit">Sort by: </span> {% endcomment %}
                                 <div class="position-relative">
                                     <div class="flex-align gap-8">
-                                        <button type="button" class="list-view-btn text-gray-200 text-2xl">
+                                        {% comment %} <button type="button" class="list-view-btn text-gray-200 text-2xl">
                                             <i class="ph ph-rows"></i>
-                                        </button>
+                                        </button> {% endcomment %}
                                         <button type="button" class="grid-view-btn active text-gray-200 text-2xl">
                                             <i class="ph ph-squares-four"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <label for="upload" class="btn btn-main text-sm btn-sm px-24 py-12 d-flex align-items-center gap-8">
+                            {% comment %} <label for="upload" class="btn btn-main text-sm btn-sm px-24 py-12 d-flex align-items-center gap-8">
                                 <i class="ph ph-upload-simple d-flex text-xl"></i>
                                 Upload File
-                            </label>
-                            <input type="file" id="upload" hidden>
+                            </label> {% endcomment %}
+                            {% comment %} <input type="file" id="upload" hidden> {% endcomment %}
                         </div>
                     </div>
                 </div>
                 <!-- Card Header End -->
-
                 <div class="card-body p-0">
                     <!-- Grid View Start -->
                     <div class="grid-view py-20">
+                        {% for enrollment, files in data.items %}
+                        <h4 style="padding-left: 2%;
+                                    margin-top: 1%;
+                                    margin-bottom:4%;">
+                                {{enrollment.course}}
+                        </h4>
                         <div class="resource-item-wrapper px-24">
-                            <div class="resource-item">
-                                <div class="form-check">
-                                    <input class="form-check-input border-gray-200 rounded-4" id="checkbox1" type="checkbox">
-                                </div>
-                                <label for="checkbox1" class="">
-                                    <span class="d-block mb-16"><img src="assets/images/icons/file-icon1.png" alt=""></span>
-                                    <span class="d-block text-gray-400 text-15">Assignments</span>
-                                    <span class="d-block text-gray-200 text-15">32 Files</span>
-                                </label>
-                            </div>
-                            <div class="resource-item">
+                                {% if files %}
+                                    {% for file in files %}   
+                                        <div class="resource-item">
+                                            {% comment %} <div class="form-check">
+                                                <input class="form-check-input border-gray-200 rounded-4" id="checkbox1" type="checkbox">
+                                            </div> {% endcomment %}
+                                            <label for="checkbox1" class="">
+                                                <span class="d-block mb-16"><a href= "{{ file.2 }}"><img src="{% static 'images/icons/google-drive_1.png' %}" alt=""></a></span>
+                                                <span class="d-block text-gray-400 text-15">{{file.1}}</span>
+                                                {% comment %} <span class="d-block text-gray-200 text-15">32 Files</span> {% endcomment %}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% comment %} <p>No files found for this enrollment.</p> {% endcomment %}
+                                {% endif %}
+                           
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox2" type="checkbox">
                                 </div>
@@ -100,8 +112,8 @@
                                     <span class="d-block text-gray-400 text-15">Design & Art</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox3" type="checkbox">
                                 </div>
@@ -110,8 +122,8 @@
                                     <span class="d-block text-gray-400 text-15">Assignments</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox4" type="checkbox">
                                 </div>
@@ -120,8 +132,8 @@
                                     <span class="d-block text-gray-400 text-15">Development</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox5" type="checkbox">
                                 </div>
@@ -130,8 +142,8 @@
                                     <span class="d-block text-gray-400 text-15">Payments</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox6" type="checkbox">
                                 </div>
@@ -140,8 +152,8 @@
                                     <span class="d-block text-gray-400 text-15">Content</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox7" type="checkbox">
                                 </div>
@@ -150,8 +162,8 @@
                                     <span class="d-block text-gray-400 text-15">Assignments</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox8" type="checkbox">
                                 </div>
@@ -160,8 +172,8 @@
                                     <span class="d-block text-gray-400 text-15">Maths</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox9" type="checkbox">
                                 </div>
@@ -170,8 +182,8 @@
                                     <span class="d-block text-gray-400 text-15">Content</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox10" type="checkbox">
                                 </div>
@@ -180,8 +192,8 @@
                                     <span class="d-block text-gray-400 text-15">Video</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox11" type="checkbox">
                                 </div>
@@ -190,8 +202,8 @@
                                     <span class="d-block text-gray-400 text-15">Invoices</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                            <div class="resource-item">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox12" type="checkbox">
                                 </div>
@@ -200,9 +212,10 @@
                                     <span class="d-block text-gray-400 text-15">Presentation</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
-                        <div class="resource-item-wrapper px-24">
+                        {% endfor %}
+                         {% comment %}<div class="resource-item-wrapper px-24">
                             <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox13" type="checkbox">
@@ -218,7 +231,7 @@
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox14" type="checkbox">
                                 </div>
                                 <label for="checkbox14" class="">
-                                    <span class="d-block mb-16"><img src="assets/images/icons/file-icon1.png" alt=""></span>
+                                    <span class="d-block mb-16"><img src="{% static 'images/icons/google-drive_1.png' %}" alt=""></span>
                                     <span class="d-block text-gray-400 text-15">Presentation</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
@@ -444,10 +457,10 @@
                                     <span class="d-block text-gray-400 text-15">Design & Art</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                        </div>
-                        <div class="resource-item-wrapper px-24">
-                            <div class="resource-item">
+                            </div> 
+                        </div>{% endcomment %}
+                        {% comment %}<div class="resource-item-wrapper px-24">
+                             <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox37" type="checkbox">
                                 </div>
@@ -566,9 +579,9 @@
                                     <span class="d-block text-gray-400 text-15">Revenue.xls</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                        </div>
-                        <div class="resource-item-wrapper px-24">
+                            </div> 
+                        </div>{% endcomment %}
+                        {% comment %} <div class="resource-item-wrapper px-24"> 
                             <div class="resource-item">
                                 <div class="form-check">
                                     <input class="form-check-input border-gray-200 rounded-4" id="checkbox49" type="checkbox">
@@ -608,13 +621,13 @@
                                     <span class="d-block text-gray-400 text-15">Budget.xls</span>
                                     <span class="d-block text-gray-200 text-15">32 Files</span>
                                 </label>
-                            </div>
-                        </div>
+                            </div> 
+                        </div>{% endcomment %}
                     </div>
                     <!-- Grid View End -->
 
                     <!-- List View Start -->
-                    <div class="list-view d-none">
+                    {% comment %} <div class="list-view d-none">
                         <div class="card-body p-0 overflow-x-auto scroll-sm scroll-sm-horizontal">
                             <table id="studentTable" class="table table-striped style-three w-100">
                                 <thead>
@@ -915,11 +928,11 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <!-- List View End -->
                 </div>
 
-                <div class="card-footer border-top border-gray-100">
+                {% comment %} <div class="card-footer border-top border-gray-100">
                     <div class="flex-between flex-wrap gap-8 mt-20">
                         <a href="#" class="btn btn-outline-gray rounded-pill py-9 flex-align gap-4">
                             <span class="d-flex text-xl"><i class="ph ph-arrow-left"></i></span> 
@@ -955,7 +968,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <!-- Card End -->
 
         </div>

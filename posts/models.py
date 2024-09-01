@@ -347,12 +347,11 @@ class offers(models.Model):
 
 
 class user_enrollment(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    course_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Post, on_delete=models.CASCADE)
     enrolled_on = models.DateTimeField(auto_now_add=True)
 
 
-
-class course_videos(models.Model):
-    course_id = models.ForeignKey(Post, on_delete=models.CASCADE, default=1) 
-    video_id = models.CharField(max_length=255)  
+class notes(models.Model):    
+    URI = models.CharField(max_length=500)
+    Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='notes_posts')

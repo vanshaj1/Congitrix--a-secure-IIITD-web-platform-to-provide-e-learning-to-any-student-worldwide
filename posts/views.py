@@ -26,9 +26,25 @@ from urllib.parse import urlparse, parse_qs
 import requests
 from dotenv import load_dotenv
 import os
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
+# Path to your service account key file
+SERVICE_ACCOUNT_FILE = './secret_key.json'
+
+# The scopes required for the application
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 # Load environment variables from a .env file
 load_dotenv()
+
+# google drive authentication
+def authenticate_service_account():
+    creds = service_account.Credentials.from_service_account_file(
+        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    return build('drive', 'v3', credentials=creds)
+
+
 
 client = razorpay.Client(auth=("KEY_ID", "KEY_SECRET"))
 # Create your views here.
@@ -276,7 +292,7 @@ def userdashboard(request):
 def enrolled_courses(request):
     carts = Cart.objects.filter(user=request.user, purchase=True)
     orders = Order.objects.filter(user=request.user, ordered=True)
-    enrolled_courses = user_enrollment.objects.filter(user_id=request.user)
+    enrolled_courses = user_enrollment.objects.filter(user=request.user)
     customer = Customer.objects.get(user_id=request.user.id)
     # if orders.exists() and carts.exists():
     #     order = orders[0]
@@ -284,6 +300,62 @@ def enrolled_courses(request):
     context = {'enrolled_courses':enrolled_courses, 'customer':customer}
     return render(request,'userdashboard/student-courses.html',context)
 
+@login_required(login_url='/userlogin/')
+def get_notes(request):
+    enrolled_courses = user_enrollment.objects.filter(user=request.user)
+    drive_service = authenticate_service_account()
+    data = {}
+
+    for instance in enrolled_courses:
+        course = instance.course
+        course_content = []
+        notes_instances = notes.objects.filter(Post=course)
+        for notes_instance in notes_instances:
+            URI = notes_instance.URI
+            folder_id = get_folder_id_from_url(URI)
+            query = f"'{folder_id}' in parents"
+            results = drive_service.files().list(q=query).execute()
+            items = results.get('files', [])
+            
+            if not items:
+                print('No files found.')
+            else:
+                for item in items:
+                    content = []
+                    file_name = item['name']
+                    file_id = item['id']
+                    file_link = f"https://drive.google.com/file/d/{file_id}/view"
+                    print(f"File Name: {file_name}, File Link: {file_link}")
+                    content.append(file_id)
+                    content.append(file_name)
+                    content.append(file_link)
+                    course_content.append(content)
+        data[instance] = course_content
+        print(data)
+
+
+    context = {'data':data}
+    return render(request,'userdashboard/resources.html',context)
+
+
+
+def get_folder_id_from_url(url):
+    # Ensure the URL starts with the correct prefix
+    prefix = "https://drive.google.com/drive/folders/"
+    
+    # Check if the URL contains the prefix
+    if url.startswith(prefix):
+        # Extract the part after the prefix
+        folder_id = url[len(prefix):]
+        
+        # Check if the extracted part is non-empty
+        if folder_id:
+            return folder_id
+        else:
+            return None
+    else:
+        return None
+    
 
 @login_required(login_url='/userlogin/')
 def userprofile(request):
@@ -968,6 +1040,56 @@ def delete_features(request, id):
     messages.success(request, "Features Deleted Successfully.")
     return redirect('allfeatures') 
 
+
+
+
+
+
+
+#`````````````````````````````````````````````Notes````````````````````````````````````````````````
+def add_notes(request):
+    notes = notesform()
+    if request.method=='POST':
+        notes= notesform(request.POST, request.FILES)
+        if notes.is_valid():
+            notes.save()
+        messages.success(request, "Notes Added Sucessfully !!")    
+        return redirect('allNotes')
+    return render(request, "webadmin/add_notes.html", {'notes':notes})
+
+
+def allNotes(request):
+    f = notes.objects.all()
+    context = {'f':f}
+    return render(request, 'webadmin/allNotes.html', context)
+
+def edit_notes(request, id):
+    if request.method == 'POST':
+        feat = notes.objects.get(id=id)
+        editNotes = notesform(request.POST, instance=feat)
+        if editNotes .is_valid():
+            editNotes .save()
+        messages.success(request, "Notes Update Sucessfully !!")
+        return redirect('allNotes')
+    else:
+        feat = notes.objects.get(id=id)
+        editNotes = notesform(instance=feat)   
+
+    return render(request, "webadmin/edit_notes.html", {'notes':editNotes })
+
+def delete_notes(request, id):
+    delete = notes.objects.get(pk=id)  #pk means primary key
+    delete.delete()
+    messages.success(request, "Notes Deleted Successfully.")
+    return redirect('allNotes') 
+
+# ````````````````````````````````````````````````````````````````````````````````````````````````
+
+
+
+
+
+
 def allcurriculam(request):
     f = Curriculam.objects.all()
     context = {'f':f}
@@ -1307,7 +1429,7 @@ def enroll(request):
     # Get the course instance by ID
     course = Post.objects.get(id=course_id)
     # Create or get the enrollment
-    enrollment, created = user_enrollment.objects.get_or_create(user_id=user, course_id=course)
+    enrollment, created = user_enrollment.objects.get_or_create(user=user, course=course)
 
     # Handle success or already enrolled cases
     if created:

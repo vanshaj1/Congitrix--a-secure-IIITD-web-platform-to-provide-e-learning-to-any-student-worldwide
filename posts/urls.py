@@ -45,6 +45,14 @@ urlpatterns = [
     path('webadmin/edit_features/<int:id>', views.edit_features, name='edit_features'),
     path('webadmin/delete_features/<int:id>', views.delete_features, name='delete_features'),
     path('webadmin/allfeatures/', views.allfeatures, name='allfeatures'),
+
+#````````````````````````````````Webadmin Notes api````````````````````````````````````````````````````
+    path('webadmin/add_notes/', views.add_notes, name='add_notes'),
+    path('webadmin/edit_notes/<int:id>', views.edit_notes, name='edit_notes'),
+    path('webadmin/delete_notes/<int:id>', views.delete_notes, name='delete_notes'),
+    path('webadmin/allNotes/', views.allNotes, name='allNotes'),
+#````````````````````````````````````````````````````````````````````````````````````````````````
+
     path('webadmin/add_curriculam/', views.add_curriculam, name='add_curriculam'),
     path('webadmin/edit_curriculam/<int:id>', views.edit_curriculam, name='edit_curriculam'),
     path('webadmin/delete_curriculam/<int:id>', views.delete_curriculam, name='delete_curriculam'),
@@ -87,6 +95,7 @@ urlpatterns = [
     path('certificate/<str:category_slug>/<str:slug>/', views.usercertificate, name='certificate'),
     path('enroll/', views.enroll, name='enroll'),
     path('enrolled-courses/',views.enrolled_courses, name = 'enrolled_courses'),
+    path('get-notes/',views.get_notes, name = 'get_notes'),
 
 
 

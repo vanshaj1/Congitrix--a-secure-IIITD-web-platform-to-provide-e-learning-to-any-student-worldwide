@@ -226,3 +226,9 @@ class ribbonform(forms.ModelForm):
     class Meta:
         model = offers
         fields = '__all__'
+
+
+class notesform(forms.ModelForm):
+    class Meta:
+        model = notes
+        fields =  '__all__'
